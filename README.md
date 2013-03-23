@@ -11,7 +11,9 @@ mullak99's Mod is created by mullak99 entirely, including coding, and textures
 
 Ideas for mod by
 
+
 mullak99 - Everything exept for name of Roxite
+
 SSJ4_Roxas - Name For Roxite
 
 
@@ -19,5 +21,7 @@ SSJ4_Roxas - Name For Roxite
 
 Many thanks to
 
+
 Minecraft Forge Team
+
 Mojang
