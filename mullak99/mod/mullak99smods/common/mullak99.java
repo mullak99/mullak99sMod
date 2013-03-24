@@ -6,7 +6,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import mullak99.mod.mullak99smods.item.ItemEnderBattery;
+import mullak99.mod.mullak99smods.item.ItemMortarandPestle;
 import mullak99.mod.mullak99smods.item.ItemMullite;
+import mullak99.mod.mullak99smods.item.ItemMulliteDust;
 import mullak99.mod.mullak99smods.item.ItemMulliteAxe;
 import mullak99.mod.mullak99smods.item.ItemMulliteCatalyst;
 import mullak99.mod.mullak99smods.item.ItemMulliteHoe;
@@ -14,6 +16,7 @@ import mullak99.mod.mullak99smods.item.ItemMullitePickaxe;
 import mullak99.mod.mullak99smods.item.ItemMulliteShovel;
 import mullak99.mod.mullak99smods.item.ItemMulliteSword;
 import mullak99.mod.mullak99smods.item.ItemRoxite;
+import mullak99.mod.mullak99smods.item.ItemRoxiteDust;
 import mullak99.mod.mullak99smods.item.ItemRoxiteAxe;
 import mullak99.mod.mullak99smods.item.ItemRoxiteHoe;
 import mullak99.mod.mullak99smods.item.ItemRoxitePickaxe;
@@ -57,6 +60,11 @@ public class mullak99
 	public static Item ItemMullite;
 	public static Item ItemRoxite;
 	public static Item ingotCopper;
+	
+	public static Item ItemMulliteDust;
+	public static Item ItemRoxiteDust;
+	
+	public static Item MortarandPestle;
 	
 	
 	public static Block MulliteOre;
@@ -125,8 +133,9 @@ public mullak99() {
 	
 	ItemMullite = new ItemMullite(1005).setUnlocalizedName("Mullite").setCreativeTab(CreativeTabs.tabMaterials);
 	
+	ItemMulliteDust = new ItemMulliteDust(1221).setUnlocalizedName("MulliteDust").setCreativeTab(CreativeTabs.tabMaterials);
+	
 	MulliteCatalyst = new ItemMulliteCatalyst(1200).setUnlocalizedName("MulliteCatalyst").setMaxStackSize(1).setCreativeTab(CreativeTabs.tabMaterials);
-	EnderBattery = new ItemEnderBattery(1201).setUnlocalizedName("EnderBattery").setMaxStackSize(1).setCreativeTab(CreativeTabs.tabMaterials);
 	
 	//Roxite//
 	
@@ -144,23 +153,27 @@ public mullak99() {
     RoxiteBlock = new RoxiteBlock(503,Material.rock, "RoxiteBlock").setUnlocalizedName("RoxiteBlock").setCreativeTab(CreativeTabs.tabBlock).setHardness(7F);
     RoxiteOre = new RoxiteOre(501, Material.rock, "RoxiteOre").setUnlocalizedName("RoxiteOre").setCreativeTab(CreativeTabs.tabBlock).setHardness(6F);
     
-	ItemRoxite = new ItemRoxite(1011).setUnlocalizedName("RoxiteOre").setCreativeTab(CreativeTabs.tabMaterials);
+	ItemRoxite = new ItemRoxite(1011).setUnlocalizedName("Roxite").setCreativeTab(CreativeTabs.tabMaterials);
+	ItemRoxiteDust = new ItemRoxiteDust(1222).setUnlocalizedName("RoxiteDust").setCreativeTab(CreativeTabs.tabMaterials);
 	
 	//Other//
+	
+	MortarandPestle = new ItemMortarandPestle(1211).setUnlocalizedName("MortarandPestle").setMaxStackSize(1).setCreativeTab(CreativeTabs.tabTools);
 	
 	CopperOre = new CopperOre(504, Material.rock, "CopperOre").setUnlocalizedName("CopperOre").setCreativeTab(CreativeTabs.tabBlock).setHardness(3F);
 	ingotCopper = new ingotCopper(1100).setUnlocalizedName("Copper").setCreativeTab(CreativeTabs.tabMaterials);
 	CopperBlock = new CopperBlock(505, Material.rock, "CopperBlock").setUnlocalizedName("CopperBlock").setCreativeTab(CreativeTabs.tabBlock).setHardness(4F);
-	//UltiFurnace = new UltiFurnace(506, false).setUnlocalizedName("UltiFurnace").setCreativeTab(CreativeTabs.tabDecorations).setHardness(5F);
+	
+	EnderBattery = new ItemEnderBattery(1201).setUnlocalizedName("EnderBattery").setMaxStackSize(1).setCreativeTab(CreativeTabs.tabMaterials);
 	
 	//Block Register//
 	GameRegistry.registerBlock(MulliteOre);
-	GameRegistry.registerBlock(RoxiteOre);
-	GameRegistry.registerBlock(MulliteBlock);
 	GameRegistry.registerBlock(RoxiteBlock);
 	GameRegistry.registerBlock(CopperOre);
 	GameRegistry.registerBlock(CopperBlock);
-	//GameRegistry.registerBlock(UltiFurnace);
+	GameRegistry.registerBlock(RoxiteOre);
+	GameRegistry.registerBlock(MulliteBlock);
+
 	
 	GameRegistry.registerBlock(MulliteTNT);
 	
@@ -175,6 +188,8 @@ public mullak99() {
 	LanguageRegistry.addName(MulliteAxe, "Mullite Axe");
 	LanguageRegistry.addName(MulliteHoe, "Mullite Hoe");
 	
+	LanguageRegistry.addName(ItemMulliteDust, "Mullite Dust");
+	
 	LanguageRegistry.addName(MulliteTNT, "Mullite TNT [W.I.P]");
 	
 	LanguageRegistry.addName(MulliteHelmet, "Mullite Helmet");
@@ -182,10 +197,8 @@ public mullak99() {
 	LanguageRegistry.addName(MulliteLegs, "Mullite Leggings");
 	LanguageRegistry.addName(MulliteBoots, "Mullite Boots");
 	
-	LanguageRegistry.addName(DEBUGPickaxe, "Debug Pickaxe");
-	
 	LanguageRegistry.addName(MulliteCatalyst, "Mullite Catalyst");
-	LanguageRegistry.addName(EnderBattery, "Ender Battery");
+	
 	
 	//Roxite//
 	
@@ -198,6 +211,8 @@ public mullak99() {
 	LanguageRegistry.addName(RoxiteAxe, "Roxite Axe");
 	LanguageRegistry.addName(RoxiteHoe, "Roxite Hoe");
 	
+	LanguageRegistry.addName(ItemRoxiteDust, "Roxite Dust");
+	
 	LanguageRegistry.addName(RoxiteHelmet, "Roxite Helmet");
 	LanguageRegistry.addName(RoxiteChest, "Roxite Chestplate");
 	LanguageRegistry.addName(RoxiteLegs, "Roxite Leggings");
@@ -207,13 +222,16 @@ public mullak99() {
 	
 	LanguageRegistry.addName(CopperOre, "Copper Ore");
 	LanguageRegistry.addName(CopperBlock, "Block of Copper");
-	//LanguageRegistry.addName(UltiFurnace, "Hephaestus' Furnace");
+	LanguageRegistry.addName(MortarandPestle, "Mortar and Pestle");
+	LanguageRegistry.addName(EnderBattery, "Ender Battery");
+	LanguageRegistry.addName(DEBUGPickaxe, "Debug Pickaxe");
 	//Ingot at bottom
 	
 	//Catalyst//
 	
 	MulliteCatalyst.setContainerItem(MulliteCatalyst);
 	EnderBattery.setContainerItem(EnderBattery);
+	MortarandPestle.setContainerItem(MortarandPestle);
 	
 	GameRegistry.registerFuelHandler(new mullak99FuelHandler());
 	
@@ -270,8 +288,17 @@ public mullak99() {
 			{
 		"X X", "X X", 'X', mullak99.ItemMullite,
 			});
+	GameRegistry.addRecipe(new ItemStack(ItemMulliteDust, 1), new Object [] 
+			{
+		"X", "-", 'X', mullak99.ItemMullite, '-', mullak99.MortarandPestle,
+			});
+	GameRegistry.addRecipe(new ItemStack(ItemMulliteDust, 2), new Object [] 
+			{
+		"X", "-", 'X', mullak99.MulliteOre, '-', mullak99.MortarandPestle,
+			});
 	
 	GameRegistry.addSmelting(MulliteOre.blockID, new ItemStack (ItemMullite, 1), 5F);
+	GameRegistry.addSmelting(ItemMulliteDust.itemID, new ItemStack (ItemMullite, 1), 5F);
 	
 	
 	//Roxite//
@@ -320,8 +347,17 @@ public mullak99() {
 			{
 		"X X", "X X", 'X', mullak99.ItemRoxite,
 			});
+	GameRegistry.addRecipe(new ItemStack(ItemRoxiteDust, 1), new Object [] 
+			{
+		"X", "-", 'X', mullak99.ItemRoxite, '-', mullak99.MortarandPestle,
+			});
+	GameRegistry.addRecipe(new ItemStack(ItemRoxiteDust, 2), new Object [] 
+			{
+		"X", "-", 'X', mullak99.RoxiteOre, '-', mullak99.MortarandPestle,
+			});
 	
 	GameRegistry.addSmelting(RoxiteOre.blockID, new ItemStack (ItemRoxite, 1), 5F);
+	GameRegistry.addSmelting(ItemRoxiteDust.itemID, new ItemStack (ItemRoxite, 1), 5F);
 	
 	//Other//
 	
@@ -349,6 +385,10 @@ public mullak99() {
 	GameRegistry.addRecipe(new ItemStack(Item.bucketWater, 1), new Object [] 
 			{
 		"X-", 'X', mullak99.MulliteCatalyst, '-', Item.bucketEmpty,
+			});
+	GameRegistry.addRecipe(new ItemStack(MortarandPestle, 1), new Object [] 
+			{
+		"X-X", " X ", 'X', Block.stone, '-', Item.ingotIron,
 			});
 	
 	

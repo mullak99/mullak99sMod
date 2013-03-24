@@ -83,7 +83,7 @@ public class MulliteTNT extends Block
     {
         if (!par1World.isRemote)
         {
-            EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(par1World, (double)((float)par2 + 0.5F), (double)((float)par3 + 0.5F), (double)((float)par4 + 0.5F), par5Explosion.func_94613_c());
+        	EntityMulliteTNT entitytntprimed = new EntityMulliteTNT(par1World, (double)((float)par2 + 0.5F), (double)((float)par3 + 0.5F), (double)((float)par4 + 0.5F), par5Explosion.func_94613_c());
             entitytntprimed.fuse = par1World.rand.nextInt(entitytntprimed.fuse / 4) + entitytntprimed.fuse / 8;
             par1World.spawnEntityInWorld(entitytntprimed);
         }
@@ -103,9 +103,9 @@ public class MulliteTNT extends Block
         {
             if ((par5 & 1) == 1)
             {
-                EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(par1World, (double)((float)par2 + 0.5F), (double)((float)par3 + 0.5F), (double)((float)par4 + 0.5F), par6EntityLiving);
-                par1World.spawnEntityInWorld(entitytntprimed);
-                par1World.playSoundAtEntity(entitytntprimed, "random.fuse", 1.0F, 1.0F);
+            	EntityMulliteTNT EntityMulliteTNT = new EntityMulliteTNT(par1World, (double)((float)par2 + 0.5F), (double)((float)par3 + 0.5F), (double)((float)par4 + 0.5F), par6EntityLiving);
+                par1World.spawnEntityInWorld(EntityMulliteTNT);
+                par1World.playSoundAtEntity(EntityMulliteTNT, "random.fuse", 1.0F, 1.0F);
             }
         }
     }
@@ -160,8 +160,8 @@ public class MulliteTNT extends Block
      */
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.blockIcon = par1IconRegister.registerIcon("tnt_side");
-        this.field_94393_a = par1IconRegister.registerIcon("tnt_top");
-        this.field_94392_b = par1IconRegister.registerIcon("tnt_bottom");
+        this.blockIcon = par1IconRegister.registerIcon("mullak99:MulliteTNT_Side");
+        this.field_94393_a = par1IconRegister.registerIcon("mullak99:MulliteBlock");
+        this.field_94392_b = par1IconRegister.registerIcon("mullak99:MulliteBlock");
     }
 }
