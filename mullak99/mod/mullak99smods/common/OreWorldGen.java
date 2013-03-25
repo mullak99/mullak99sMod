@@ -59,6 +59,18 @@ public class OreWorldGen implements IWorldGenerator
 				(new WorldGenMinable(mullak99.CopperOre.blockID, 8)).generate(world, rand,
 				randPosX, randPosY, randPosZ);
 				}
+				//10 vein of ore per chunk
+				for (int i = 0; i < 10; i++) 
+				{
+					//16x16 area up to y = 64
+				int randPosX = chunkX + rand.nextInt(16);
+				int randPosY = rand.nextInt(63);
+				int randPosZ = chunkZ + rand.nextInt(16);
+				// 8 blocks per vein
+				(new WorldGenMinable(mullak99.TinOre.blockID, 8)).generate(world, rand,
+				randPosX, randPosY, randPosZ);
+				}
+		
 		
 	}
 

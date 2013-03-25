@@ -2,6 +2,8 @@ package mullak99.mod.mullak99smods.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -14,6 +16,7 @@ import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
@@ -164,4 +167,8 @@ public class MulliteTNT extends Block
         this.field_94393_a = par1IconRegister.registerIcon("mullak99:MulliteBlock");
         this.field_94392_b = par1IconRegister.registerIcon("mullak99:MulliteBlock");
     }
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+	{
+	par3List.add("Do not use!");
+	}
 }

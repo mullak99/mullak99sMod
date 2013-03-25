@@ -5,6 +5,8 @@ import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import mullak99.mod.mullak99smods.item.ItemBatteryCase;
+import mullak99.mod.mullak99smods.item.ItemCopperContacts;
 import mullak99.mod.mullak99smods.item.ItemEnderBattery;
 import mullak99.mod.mullak99smods.item.ItemMortarandPestle;
 import mullak99.mod.mullak99smods.item.ItemMullite;
@@ -25,13 +27,16 @@ import mullak99.mod.mullak99smods.item.ItemRoxiteSword;
 import mullak99.mod.mullak99smods.item.MulliteArmor;
 import mullak99.mod.mullak99smods.item.RoxiteArmor;
 import mullak99.mod.mullak99smods.item.ingotCopper;
+import mullak99.mod.mullak99smods.item.ingotTin;
 import mullak99.mod.mullak99smods.block.MulliteOre;
 import mullak99.mod.mullak99smods.block.MulliteTNT;
 import mullak99.mod.mullak99smods.block.RoxiteOre;
+import mullak99.mod.mullak99smods.block.TinOre;
 import mullak99.mod.mullak99smods.block.MulliteBlock;
 import mullak99.mod.mullak99smods.block.RoxiteBlock;
 import mullak99.mod.mullak99smods.block.CopperOre;
 import mullak99.mod.mullak99smods.block.CopperBlock;
+import mullak99.mod.mullak99smods.block.TinBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -48,7 +53,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraftforge.common.Configuration;
 
-@Mod(modid = "mullak99's Mod", name = "mullak99's Mod", version = "Alpha 0.0.1")
+@Mod(modid = "mullak99's Mod", name = "mullak99's Mod", version = "Alpha 0.0.2")
 
 public class mullak99
 {
@@ -56,10 +61,12 @@ public class mullak99
 	
 	public static CommonProxy proxy;
 	
-	
 	public static Item ItemMullite;
 	public static Item ItemRoxite;
 	public static Item ingotCopper;
+	public static Item ingotTin;
+	
+	public static Item CopperContacts;
 	
 	public static Item ItemMulliteDust;
 	public static Item ItemRoxiteDust;
@@ -70,6 +77,8 @@ public class mullak99
 	public static Block MulliteOre;
 	public static Block RoxiteOre;
 	public static Block CopperOre;
+	public static Block TinOre;
+	public static Block TinBlock;
 	
 	public static Block MulliteTNT;
 	
@@ -89,6 +98,7 @@ public class mullak99
 	
 	public static Item MulliteCatalyst;
 	public static Item EnderBattery;
+	public static Item BatteryCase;
 	
 	public static Item MullitePickaxe;
 	public static Item MulliteShovel;
@@ -161,19 +171,27 @@ public mullak99() {
 	MortarandPestle = new ItemMortarandPestle(1211).setUnlocalizedName("MortarandPestle").setMaxStackSize(1).setCreativeTab(CreativeTabs.tabTools);
 	
 	CopperOre = new CopperOre(504, Material.rock, "CopperOre").setUnlocalizedName("CopperOre").setCreativeTab(CreativeTabs.tabBlock).setHardness(3F);
+	TinOre = new TinOre(506, Material.rock, "TinOre").setUnlocalizedName("TinOre").setCreativeTab(CreativeTabs.tabBlock).setHardness(3F);
+	TinBlock = new TinBlock(507, Material.rock, "TinBlock").setUnlocalizedName("TinBlock").setCreativeTab(CreativeTabs.tabBlock).setHardness(4F);
 	ingotCopper = new ingotCopper(1100).setUnlocalizedName("Copper").setCreativeTab(CreativeTabs.tabMaterials);
+	ingotTin = new ingotTin(1101).setUnlocalizedName("Copper").setCreativeTab(CreativeTabs.tabMaterials);
 	CopperBlock = new CopperBlock(505, Material.rock, "CopperBlock").setUnlocalizedName("CopperBlock").setCreativeTab(CreativeTabs.tabBlock).setHardness(4F);
 	
+	CopperContacts = new ItemCopperContacts(1116).setUnlocalizedName("CopperContacts").setCreativeTab(CreativeTabs.tabMaterials);
+	
 	EnderBattery = new ItemEnderBattery(1201).setUnlocalizedName("EnderBattery").setMaxStackSize(1).setCreativeTab(CreativeTabs.tabMaterials);
+	
+	BatteryCase = new ItemBatteryCase(1115).setUnlocalizedName("BatteryCase").setCreativeTab(CreativeTabs.tabMaterials);
 	
 	//Block Register//
 	GameRegistry.registerBlock(MulliteOre);
 	GameRegistry.registerBlock(RoxiteBlock);
 	GameRegistry.registerBlock(CopperOre);
 	GameRegistry.registerBlock(CopperBlock);
+	GameRegistry.registerBlock(TinOre);
 	GameRegistry.registerBlock(RoxiteOre);
 	GameRegistry.registerBlock(MulliteBlock);
-
+	GameRegistry.registerBlock(TinBlock);
 	
 	GameRegistry.registerBlock(MulliteTNT);
 	
@@ -225,6 +243,10 @@ public mullak99() {
 	LanguageRegistry.addName(MortarandPestle, "Mortar and Pestle");
 	LanguageRegistry.addName(EnderBattery, "Ender Battery");
 	LanguageRegistry.addName(DEBUGPickaxe, "Debug Pickaxe");
+	LanguageRegistry.addName(TinOre, "Tin Ore");
+	LanguageRegistry.addName(TinBlock, "Block of Tin");
+	LanguageRegistry.addName(BatteryCase, "Battery Casing");
+	LanguageRegistry.addName(CopperContacts, "Copper Contacts");
 	//Ingot at bottom
 	
 	//Catalyst//
@@ -369,8 +391,21 @@ public mullak99() {
 			{
 		   "X", 'X', CopperBlock
 			});
+	GameRegistry.addRecipe(new ItemStack(BatteryCase, 1), new Object [] 
+			{
+		"X-X", "X~X", "X-X", 'X', mullak99.ingotTin, '-', mullak99.CopperContacts, '~', Item.redstone,
+			});
+	GameRegistry.addRecipe(new ItemStack(CopperContacts, 2), new Object [] 
+			{
+		   "X", 'X', mullak99.ingotCopper
+			});
+	GameRegistry.addRecipe(new ItemStack(TinBlock, 1), new Object [] 
+			{
+		   "XXX", "XXX", "XXX", 'X', ingotTin
+			});
 	
 	GameRegistry.addSmelting(CopperOre.blockID, new ItemStack(ingotCopper, 1), 1F);
+	GameRegistry.addSmelting(TinOre.blockID, new ItemStack(ingotTin, 1), 1F);
 	
 	//Catalyst//
 	
@@ -380,7 +415,7 @@ public mullak99() {
 			});
 	GameRegistry.addRecipe(new ItemStack(EnderBattery, 1), new Object [] 
 			{
-		"X-X", "~+~", "X-X", 'X', mullak99.MulliteBlock, '-', mullak99.ingotCopper, '~', Item.netherStar, '+', Block.dragonEgg
+		"X-X", "~#~", "X+X", 'X', mullak99.MulliteBlock, '-', mullak99.MulliteCatalyst, '~', Item.netherStar, '+', Block.dragonEgg, '#', mullak99.BatteryCase
 			});
 	GameRegistry.addRecipe(new ItemStack(Item.bucketWater, 1), new Object [] 
 			{
@@ -390,6 +425,7 @@ public mullak99() {
 			{
 		"X-X", " X ", 'X', Block.stone, '-', Item.ingotIron,
 			});
+	
 	
 	
 	
@@ -417,17 +453,21 @@ public void load(FMLInitializationEvent event)
 public static void addNames()
 {
         LanguageRegistry.addName(ingotCopper, "Copper Ingot");
+        LanguageRegistry.addName(ingotTin, "Tin Ingot");
 }
 
 public static void oreRegistration()
 {
         OreDictionary.registerOre("ingotCopper", new ItemStack(ingotCopper));
+        OreDictionary.registerOre("ingotTin", new ItemStack(ingotTin));
 }
 
 public static void addOreRecipes()
 {
         GameRegistry.addRecipe(new ShapedOreRecipe(Item.bucketEmpty, true, new Object[]{
                         "X X", " X ", Character.valueOf('X'), ingotCopper}));
-}
-}
+        GameRegistry.addRecipe(new ShapedOreRecipe(Item.bucketEmpty, true, new Object[]{
+        				"X X", " X ", Character.valueOf('X'), ingotTin}));
 
+}
+}
