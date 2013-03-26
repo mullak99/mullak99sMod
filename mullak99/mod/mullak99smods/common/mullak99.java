@@ -53,7 +53,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraftforge.common.Configuration;
 
-@Mod(modid = "mullak99's Mod", name = "mullak99's Mod", version = "Alpha 0.0.2")
+@Mod(modid = "mullak99's Mod", name = "mullak99's Mod", version = "Alpha 0.1.0")
 
 public class mullak99
 {
@@ -174,7 +174,7 @@ public mullak99() {
 	TinOre = new TinOre(506, Material.rock, "TinOre").setUnlocalizedName("TinOre").setCreativeTab(CreativeTabs.tabBlock).setHardness(3F);
 	TinBlock = new TinBlock(507, Material.rock, "TinBlock").setUnlocalizedName("TinBlock").setCreativeTab(CreativeTabs.tabBlock).setHardness(4F);
 	ingotCopper = new ingotCopper(1100).setUnlocalizedName("Copper").setCreativeTab(CreativeTabs.tabMaterials);
-	ingotTin = new ingotTin(1101).setUnlocalizedName("Copper").setCreativeTab(CreativeTabs.tabMaterials);
+	ingotTin = new ingotTin(1101).setUnlocalizedName("Tin").setCreativeTab(CreativeTabs.tabMaterials);
 	CopperBlock = new CopperBlock(505, Material.rock, "CopperBlock").setUnlocalizedName("CopperBlock").setCreativeTab(CreativeTabs.tabBlock).setHardness(4F);
 	
 	CopperContacts = new ItemCopperContacts(1116).setUnlocalizedName("CopperContacts").setCreativeTab(CreativeTabs.tabMaterials);
@@ -247,6 +247,8 @@ public mullak99() {
 	LanguageRegistry.addName(TinBlock, "Block of Tin");
 	LanguageRegistry.addName(BatteryCase, "Battery Casing");
 	LanguageRegistry.addName(CopperContacts, "Copper Contacts");
+    LanguageRegistry.addName(ingotTin, "Tin Ingot");
+    LanguageRegistry.addName(ingotCopper, "Copper Ingot");
 	//Ingot at bottom
 	
 	//Catalyst//
@@ -452,8 +454,8 @@ public void load(FMLInitializationEvent event)
 
 public static void addNames()
 {
-        LanguageRegistry.addName(ingotCopper, "Copper Ingot");
-        LanguageRegistry.addName(ingotTin, "Tin Ingot");
+        
+
 }
 
 public static void oreRegistration()
