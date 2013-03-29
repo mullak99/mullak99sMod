@@ -1,15 +1,22 @@
 package mullak99.mod.mullak99smods.common;
 
+
 import net.minecraft.src.*;
+import universalelectricity.components.common.BasicComponents;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import universalelectricity.*;
+import mullak99.mod.mullak99smods.block.SteelBlock;
+import mullak99.mod.mullak99smods.item.ingotBronze;
 import mullak99.mod.mullak99smods.item.ItemBatteryCase;
 import mullak99.mod.mullak99smods.item.ItemCopperContacts;
 import mullak99.mod.mullak99smods.item.ItemEnderBattery;
 import mullak99.mod.mullak99smods.item.ItemMortarandPestle;
 import mullak99.mod.mullak99smods.item.ItemMullite;
+import mullak99.mod.mullak99smods.item.ItemCoalDust;
+import mullak99.mod.mullak99smods.item.ItemMulliteBattery;
 import mullak99.mod.mullak99smods.item.ItemMulliteDust;
 import mullak99.mod.mullak99smods.item.ItemMulliteAxe;
 import mullak99.mod.mullak99smods.item.ItemMulliteCatalyst;
@@ -28,7 +35,9 @@ import mullak99.mod.mullak99smods.item.MulliteArmor;
 import mullak99.mod.mullak99smods.item.RoxiteArmor;
 import mullak99.mod.mullak99smods.item.ingotCopper;
 import mullak99.mod.mullak99smods.item.ingotTin;
+import mullak99.mod.mullak99smods.item.ingotSteel;
 import mullak99.mod.mullak99smods.block.MulliteOre;
+import mullak99.mod.mullak99smods.block.BronzeBlock;
 import mullak99.mod.mullak99smods.block.MulliteTNT;
 import mullak99.mod.mullak99smods.block.RoxiteOre;
 import mullak99.mod.mullak99smods.block.TinOre;
@@ -47,13 +56,15 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraftforge.common.Configuration;
 
-@Mod(modid = "mullak99's Mod", name = "mullak99's Mod", version = "Alpha 0.1.0")
+@Mod(modid = "mullak99's Mod", name = "mullak99's Mod", version = "Beta 0.1.0")
 
 public class mullak99
 {
@@ -65,11 +76,14 @@ public class mullak99
 	public static Item ItemRoxite;
 	public static Item ingotCopper;
 	public static Item ingotTin;
+	public static Item ingotBronze;
+	public static Item ingotSteel;
 	
 	public static Item CopperContacts;
 	
 	public static Item ItemMulliteDust;
 	public static Item ItemRoxiteDust;
+	public static Item ItemCoalDust;
 	
 	public static Item MortarandPestle;
 	
@@ -79,6 +93,8 @@ public class mullak99
 	public static Block CopperOre;
 	public static Block TinOre;
 	public static Block TinBlock;
+	public static Block BronzeBlock;
+	public static Block SteelBlock;
 	
 	public static Block MulliteTNT;
 	
@@ -99,6 +115,7 @@ public class mullak99
 	public static Item MulliteCatalyst;
 	public static Item EnderBattery;
 	public static Item BatteryCase;
+	public static Item MulliteBattery;
 	
 	public static Item MullitePickaxe;
 	public static Item MulliteShovel;
@@ -174,12 +191,19 @@ public mullak99() {
 	TinOre = new TinOre(506, Material.rock, "TinOre").setUnlocalizedName("TinOre").setCreativeTab(CreativeTabs.tabBlock).setHardness(3F);
 	TinBlock = new TinBlock(507, Material.rock, "TinBlock").setUnlocalizedName("TinBlock").setCreativeTab(CreativeTabs.tabBlock).setHardness(4F);
 	ingotCopper = new ingotCopper(1100).setUnlocalizedName("Copper").setCreativeTab(CreativeTabs.tabMaterials);
+	ingotBronze = new ingotBronze(1109).setUnlocalizedName("Bronze").setCreativeTab(CreativeTabs.tabMaterials);
 	ingotTin = new ingotTin(1101).setUnlocalizedName("Tin").setCreativeTab(CreativeTabs.tabMaterials);
 	CopperBlock = new CopperBlock(505, Material.rock, "CopperBlock").setUnlocalizedName("CopperBlock").setCreativeTab(CreativeTabs.tabBlock).setHardness(4F);
+	BronzeBlock = new BronzeBlock(1110, Material.rock, "BronzeBlock").setUnlocalizedName("BronzeBlock").setCreativeTab(CreativeTabs.tabBlock).setHardness(4F);
+	ingotSteel = new ingotSteel(1230).setUnlocalizedName("Steel").setCreativeTab(CreativeTabs.tabMaterials);
+	SteelBlock = new SteelBlock(1231, Material.rock, "SteelBlock").setUnlocalizedName("SteelBlock").setCreativeTab(CreativeTabs.tabBlock).setHardness(5F);
 	
 	CopperContacts = new ItemCopperContacts(1116).setUnlocalizedName("CopperContacts").setCreativeTab(CreativeTabs.tabMaterials);
 	
 	EnderBattery = new ItemEnderBattery(1201).setUnlocalizedName("EnderBattery").setMaxStackSize(1).setCreativeTab(CreativeTabs.tabMaterials);
+	MulliteBattery = new ItemMulliteBattery(1202).setUnlocalizedName("MulliteBattery").setMaxStackSize(1).setCreativeTab(CreativeTabs.tabMaterials);
+	
+	ItemCoalDust = new ItemCoalDust(1229).setUnlocalizedName("CoalDust").setCreativeTab(CreativeTabs.tabMaterials);
 	
 	BatteryCase = new ItemBatteryCase(1115).setUnlocalizedName("BatteryCase").setCreativeTab(CreativeTabs.tabMaterials);
 	
@@ -192,6 +216,8 @@ public mullak99() {
 	GameRegistry.registerBlock(RoxiteOre);
 	GameRegistry.registerBlock(MulliteBlock);
 	GameRegistry.registerBlock(TinBlock);
+	GameRegistry.registerBlock(BronzeBlock);
+	GameRegistry.registerBlock(SteelBlock);
 	
 	GameRegistry.registerBlock(MulliteTNT);
 	
@@ -249,6 +275,12 @@ public mullak99() {
 	LanguageRegistry.addName(CopperContacts, "Copper Contacts");
     LanguageRegistry.addName(ingotTin, "Tin Ingot");
     LanguageRegistry.addName(ingotCopper, "Copper Ingot");
+    LanguageRegistry.addName(MulliteBattery, "Mullite Battery");
+    LanguageRegistry.addName(ingotBronze, "Bronze Ingot");
+    LanguageRegistry.addName(BronzeBlock, "Block of Bronze");
+    LanguageRegistry.addName(ItemCoalDust, "Coal Dust");
+    LanguageRegistry.addName(ingotSteel, "Steel Ingot");
+    LanguageRegistry.addName(SteelBlock, "Block of Steel");
 	//Ingot at bottom
 	
 	//Catalyst//
@@ -319,6 +351,10 @@ public mullak99() {
 	GameRegistry.addRecipe(new ItemStack(ItemMulliteDust, 2), new Object [] 
 			{
 		"X", "-", 'X', mullak99.MulliteOre, '-', mullak99.MortarandPestle,
+			});
+	GameRegistry.addRecipe(new ItemStack(MulliteBattery, 1), new Object [] 
+			{
+		"X-X", "X~X", "X#X", 'X', mullak99.ItemMullite, '-', mullak99.MulliteCatalyst, '~', Item.netherStar, '#', mullak99.BatteryCase
 			});
 	
 	GameRegistry.addSmelting(MulliteOre.blockID, new ItemStack (ItemMullite, 1), 5F);
@@ -406,6 +442,27 @@ public mullak99() {
 		   "XXX", "XXX", "XXX", 'X', ingotTin
 			});
 	
+	GameRegistry.addRecipe(new ItemStack(ingotTin, 9), new Object [] 
+			{
+		   "X", 'X', TinBlock
+			});
+	GameRegistry.addRecipe(new ItemStack(ingotBronze, 9), new Object [] 
+			{
+		   "X", 'X', BronzeBlock
+			});
+	GameRegistry.addRecipe(new ItemStack(ingotSteel, 1), new Object [] 
+			{
+		   "X-", 'X', Item.ingotIron, '-', ItemCoalDust
+			});
+	GameRegistry.addRecipe(new ItemStack(SteelBlock, 1), new Object [] 
+			{
+		   "XXX", "XXX", "XXX", 'X', ingotSteel,
+			});
+	GameRegistry.addRecipe(new ItemStack(ingotSteel, 9), new Object [] 
+			{
+		   "X", 'X', SteelBlock,
+			});
+	
 	GameRegistry.addSmelting(CopperOre.blockID, new ItemStack(ingotCopper, 1), 1F);
 	GameRegistry.addSmelting(TinOre.blockID, new ItemStack(ingotTin, 1), 1F);
 	
@@ -427,6 +484,17 @@ public mullak99() {
 			{
 		"X-X", " X ", 'X', Block.stone, '-', Item.ingotIron,
 			});
+	GameRegistry.addRecipe(new ItemStack(ItemCoalDust, 1), new Object [] 
+			{
+		"X", "-", 'X', Item.coal, '-', mullak99.MortarandPestle,
+			});
+	
+	//UE Converts//
+	/*GameRegistry.addRecipe(new ItemStack(BasicComponents.itemWrench, 1), new Object [] 
+			{
+		"X X", " - ", " X ", 'X', Item.ingotIron, '-', Item.diamond, 
+			});*/
+	
 	
 	
 	
@@ -445,11 +513,13 @@ public mullak99() {
 }
 
 @Init
+
 public void load(FMLInitializationEvent event)
 {
         addNames();
         oreRegistration();
         addOreRecipes();
+
 }
 
 public static void addNames()
@@ -462,14 +532,27 @@ public static void oreRegistration()
 {
         OreDictionary.registerOre("ingotCopper", new ItemStack(ingotCopper));
         OreDictionary.registerOre("ingotTin", new ItemStack(ingotTin));
+        OreDictionary.registerOre("ingotBronze", new ItemStack(ingotBronze));
+        OreDictionary.registerOre("ingotSteel", new ItemStack(ingotSteel));
+        
 }
 
 public static void addOreRecipes()
 {
-        GameRegistry.addRecipe(new ShapedOreRecipe(Item.bucketEmpty, true, new Object[]{
-                        "X X", " X ", Character.valueOf('X'), ingotCopper}));
-        GameRegistry.addRecipe(new ShapedOreRecipe(Item.bucketEmpty, true, new Object[]{
-        				"X X", " X ", Character.valueOf('X'), ingotTin}));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.bucketEmpty, 1), new Object[] { "X X", " X ", 'X', "ingotCopper" }));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.bucketEmpty, 1), new Object[] { "X X", " X ", 'X', "ingotTin" }));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(mullak99.CopperContacts, 2), new Object[] { "X", 'X', "ingotCopper" }));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(mullak99.CopperBlock, 1), new Object[] { "XXX", "XXX", "XXX", 'X', "ingotCopper" }));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(mullak99.TinBlock, 1), new Object[] { "XXX", "XXX", "XXX", 'X', "ingotTin" }));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(mullak99.MulliteCatalyst, 1), new Object[] { "X-X", "-~-", "X-X", 'X', mullak99.MulliteBlock, '-', "CopperBlock", '~', Block.blockDiamond,}));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(mullak99.BatteryCase, 1), new Object[] { "X-X", "X~X", "X-X", 'X', "ingotTin", '-', mullak99.CopperContacts, '~', Item.redstone,}));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ingotBronze, 2), new Object[] { "X-", "--", 'X', "ingotTin", '-', "ingotCopper"}));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(mullak99.BronzeBlock, 1), new Object[] { "XXX", "XXX", "XXX", 'X', "ingotBronze" }));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(mullak99.SteelBlock, 1), new Object[] { "XXX", "XXX", "XXX", 'X', "ingotSteel" }));
+}
+@PreInit
+public void preInit(FMLPreInitializationEvent event) {
 
 }
+
 }

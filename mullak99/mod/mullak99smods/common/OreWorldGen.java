@@ -55,8 +55,8 @@ public class OreWorldGen implements IWorldGenerator
 				int randPosX = chunkX + rand.nextInt(16);
 				int randPosY = rand.nextInt(63);
 				int randPosZ = chunkZ + rand.nextInt(16);
-				// 8 blocks per vein
-				(new WorldGenMinable(mullak99.CopperOre.blockID, 8)).generate(world, rand,
+				// 11 blocks per vein
+				(new WorldGenMinable(mullak99.CopperOre.blockID, 11)).generate(world, rand,
 				randPosX, randPosY, randPosZ);
 				}
 				//10 vein of ore per chunk
@@ -66,8 +66,8 @@ public class OreWorldGen implements IWorldGenerator
 				int randPosX = chunkX + rand.nextInt(16);
 				int randPosY = rand.nextInt(63);
 				int randPosZ = chunkZ + rand.nextInt(16);
-				// 8 blocks per vein
-				(new WorldGenMinable(mullak99.TinOre.blockID, 8)).generate(world, rand,
+				// 9 blocks per vein
+				(new WorldGenMinable(mullak99.TinOre.blockID, 9)).generate(world, rand,
 				randPosX, randPosY, randPosZ);
 				}
 		
