@@ -16,6 +16,6 @@ public class ItemCopperContacts extends Item {
 
 	public void func_94581_a(IconRegister iconRegister)
 	{
-	         iconIndex = iconRegister.registerIcon("mullak99:CopperContacts");
+		itemIcon = iconRegister.registerIcon("mullak99:CopperContacts");
 	}
 }

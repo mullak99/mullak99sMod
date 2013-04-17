@@ -18,6 +18,6 @@ public class ItemRoxitePickaxe extends ItemPickaxe {
 	
 	public void func_94581_a(IconRegister iconRegister)
 	{
-	         iconIndex = iconRegister.registerIcon("mullak99:RoxitePickaxe");
+		itemIcon = iconRegister.registerIcon("mullak99:RoxitePickaxe");
 	}
 }

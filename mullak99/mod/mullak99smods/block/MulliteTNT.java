@@ -153,6 +153,8 @@ public class MulliteTNT extends Block
     public boolean canDropFromExplosion(Explosion par1Explosion)
     {
         return false;
+        
+        
     }
 
     @SideOnly(Side.CLIENT)
@@ -167,8 +169,4 @@ public class MulliteTNT extends Block
         this.field_94393_a = par1IconRegister.registerIcon("mullak99:MulliteBlock");
         this.field_94392_b = par1IconRegister.registerIcon("mullak99:MulliteBlock");
     }
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
-	{
-	par3List.add("Do not use!");
-	}
 }

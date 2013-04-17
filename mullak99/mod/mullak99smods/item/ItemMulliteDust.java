@@ -16,6 +16,6 @@ public class ItemMulliteDust extends Item {
 
 	public void func_94581_a(IconRegister iconRegister)
 	{
-	         iconIndex = iconRegister.registerIcon("mullak99:MulliteDust");
+		itemIcon = iconRegister.registerIcon("mullak99:MulliteDust");
 	}
 }

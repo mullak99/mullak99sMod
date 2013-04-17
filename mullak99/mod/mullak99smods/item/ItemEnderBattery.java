@@ -20,7 +20,7 @@ public class ItemEnderBattery extends Item {
 
 	public void func_94581_a(IconRegister iconRegister)
 	{
-	         iconIndex = iconRegister.registerIcon("mullak99:EnderBattery");
+		itemIcon = iconRegister.registerIcon("mullak99:EnderBattery");
 	}
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{

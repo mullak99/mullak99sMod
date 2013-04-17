@@ -19,6 +19,6 @@ public class ItemRoxiteAxe extends ItemAxe {
 	
 	public void func_94581_a(IconRegister iconRegister)
 	{
-	         iconIndex = iconRegister.registerIcon("mullak99:RoxiteAxe");
+		itemIcon = iconRegister.registerIcon("mullak99:RoxiteAxe");
 	}
 }

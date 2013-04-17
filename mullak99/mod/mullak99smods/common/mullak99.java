@@ -9,6 +9,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import universalelectricity.*;
 import mullak99.mod.mullak99smods.block.SteelBlock;
+import mullak99.mod.mullak99smods.item.ItemStaffofDay;
 import mullak99.mod.mullak99smods.item.ingotBronze;
 import mullak99.mod.mullak99smods.item.ItemBatteryCase;
 import mullak99.mod.mullak99smods.item.ItemCopperContacts;
@@ -46,13 +47,17 @@ import mullak99.mod.mullak99smods.block.RoxiteBlock;
 import mullak99.mod.mullak99smods.block.CopperOre;
 import mullak99.mod.mullak99smods.block.CopperBlock;
 import mullak99.mod.mullak99smods.block.TinBlock;
+import mullak99.mod.mullak99smods.block.ChestMullite;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -60,15 +65,122 @@ import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraftforge.common.Configuration;
+import cpw.*;
+import cpw.mods.*;
+import cpw.mods.fml.*;
+import cpw.mods.fml.client.*;
+import cpw.mods.fml.client.modloader.*;
+import cpw.mods.fml.client.registry.*;
+import cpw.mods.fml.common.*;
+import cpw.mods.fml.common.asm.*;
+import cpw.mods.fml.common.asm.transformers.*;
+import cpw.mods.fml.common.discovery.*;
+import cpw.mods.fml.common.discovery.asm.*;
+import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.functions.*;
+import cpw.mods.fml.common.modloader.*;
+import cpw.mods.fml.common.network.*;
+import cpw.mods.fml.common.registry.*;
+import cpw.mods.fml.common.toposort.*;
+import cpw.mods.fml.common.versioning.*;
+import cpw.mods.fml.relauncher.*;
+import cpw.mods.fml.server.*;
+import ibxm.*;
+import net.*;
+import net.minecraft.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.client.*;
+import net.minecraft.client.audio.*;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.achievement.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.model.*;
+import net.minecraft.client.multiplayer.*;
+import net.minecraft.client.particle.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.culling.*;
+import net.minecraft.client.renderer.entity.*;
+import net.minecraft.client.renderer.tileentity.*;
+import net.minecraft.client.settings.*;
+import net.minecraft.client.texturepacks.*;
+import net.minecraft.command.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.dispenser.*;
+import net.minecraft.enchantment.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.boss.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.passive.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.item.crafting.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.network.rcon.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.profiler.*;
+import net.minecraft.server.*;
+import net.minecraft.server.dedicated.*;
+import net.minecraft.server.gui.*;
+import net.minecraft.server.integrated.*;
+import net.minecraft.server.management.*;
+import net.minecraft.src.*;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.chunk.storage.*;
+import net.minecraft.world.demo.*;
+import net.minecraft.world.gen.*;
+import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.layer.*;
+import net.minecraft.world.gen.structure.*;
+import net.minecraft.world.storage.*;
+import net.minecraftforge.*;
+import net.minecraftforge.classloading.*;
+import net.minecraftforge.client.*;
+import net.minecraftforge.client.event.*;
+import net.minecraftforge.client.event.sound.*;
+import net.minecraftforge.common.*;
+import net.minecraftforge.event.*;
+import net.minecraftforge.event.entity.*;
+import net.minecraftforge.event.entity.item.*;
+import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.minecart.*;
+import net.minecraftforge.event.entity.player.*;
+import net.minecraftforge.event.terraingen.*;
+import net.minecraftforge.event.world.*;
+import net.minecraftforge.liquids.*;
+import net.minecraftforge.oredict.*;
+import net.minecraftforge.transformers.*;
+import java.util.Map;
+import java.util.Random;
 
 @Mod(modid = "mullak99's Mod", name = "mullak99's Mod", version = "Beta 0.1.0")
 
 public class mullak99
 {
 	@SidedProxy(clientSide = "mullak99.mod.mullak99smods.common.ClientProxy", serverSide = "mullak99.mod.mullak99smods.common.CommonProxy")
+	
+	
+	
 	
 	public static CommonProxy proxy;
 	
@@ -103,6 +215,8 @@ public class mullak99
 	public static Block RoxiteBlock;
 	public static Block CopperBlock;
 	
+	public static Block ChestMullite;
+	
 	public static Item MulliteHelmet;
 	public static Item MulliteChest;
 	public static Item MulliteLegs;
@@ -128,41 +242,46 @@ public class mullak99
 	public static Item RoxiteAxe;
 	public static Item RoxiteHoe;
 	
+	public static Item StaffofDay;
+	
+	/*public static final int renderMullite = proxy.addArmor("Mullite");
+	public static final int renderRoxite = proxy.addArmor("Roxite");*/
+	
 	public static Item DEBUGPickaxe;
 	
 	public static EnumToolMaterial toolMullite = EnumHelper.addToolMaterial("MULLITE", 3, 2061, 15.0F, 6, 10);
 	public static EnumToolMaterial toolDebug = EnumHelper.addToolMaterial("DEBUG", 3, 999999999, 99999999999999999999999999999.9F, 6, 10);
 	public static EnumArmorMaterial ArmorMullite = EnumHelper.addArmorMaterial("MULLITE", 44, new int[]{4, 9, 7, 4}, 10);
-	
-public mullak99() {
-	
+	public static EnumArmorMaterial ArmorRoxite = EnumHelper.addArmorMaterial("Roxite", 44, new int[]{4, 9, 7, 4}, 10);
+		
+	@Init
+	public void load(FMLInitializationEvent event)
+	{
+		
 	//Mullite//
 	
 	
 	
+		
 	MullitePickaxe =  new ItemMullitePickaxe(1000, toolMullite).setUnlocalizedName("MullitePickaxe");
 	MulliteShovel =  new ItemMulliteShovel(1001, toolMullite).setUnlocalizedName("MulliteShovel");
 	MulliteSword =  new ItemMulliteSword(1002, toolMullite).setUnlocalizedName("MulliteSword");
 	MulliteAxe =  new ItemMulliteAxe(1003, toolMullite).setUnlocalizedName("MulliteAxe");
 	MulliteHoe =  new ItemMulliteHoe(1004, toolMullite).setUnlocalizedName("MulliteHoe");
-	
-	DEBUGPickaxe =  new ItemMullitePickaxe(1111, toolDebug).setUnlocalizedName("DEBUGPickaxe");
-	
-	MulliteHelmet =  new MulliteArmor(1012, ArmorMullite, ModLoader.addArmor("MulliteHelmet"), 0).setUnlocalizedName("mod/MulliteHelmet").setCreativeTab(CreativeTabs.tabCombat);
-	MulliteChest =  new MulliteArmor(1013, ArmorMullite, ModLoader.addArmor("MulliteChest"), 1).setUnlocalizedName("mod/MulliteChest").setCreativeTab(CreativeTabs.tabCombat);
-	MulliteLegs =  new MulliteArmor(1014, ArmorMullite, ModLoader.addArmor("MulliteLegs"), 2).setUnlocalizedName("mod/MulliteLegs").setCreativeTab(CreativeTabs.tabCombat);
-	MulliteBoots =  new MulliteArmor(1015, ArmorMullite, ModLoader.addArmor("MulliteBoots"), 3).setUnlocalizedName("mod/MulliteBoots").setCreativeTab(CreativeTabs.tabCombat);
-	
+	DEBUGPickaxe =  new ItemMullitePickaxe(1111, toolDebug).setUnlocalizedName("DEBUGPickaxe");	
+	MulliteHelmet =  new MulliteArmor(1012, ArmorMullite, proxy.addArmor("Mullite"), 0).setUnlocalizedName("MulliteHelmet").setCreativeTab(CreativeTabs.tabCombat);
+	MulliteChest =  new MulliteArmor(1013, ArmorMullite, proxy.addArmor("Mullite"), 1).setUnlocalizedName("MulliteChest").setCreativeTab(CreativeTabs.tabCombat);
+	MulliteLegs =  new MulliteArmor(1014, ArmorMullite, proxy.addArmor("Mullite"), 2).setUnlocalizedName("MulliteLegs").setCreativeTab(CreativeTabs.tabCombat);
+	MulliteBoots =  new MulliteArmor(1015, ArmorMullite, proxy.addArmor("Mullite"), 3).setUnlocalizedName("MulliteBoots").setCreativeTab(CreativeTabs.tabCombat);
 	MulliteBlock = new MulliteBlock(502,Material.rock, "MulliteBlock").setUnlocalizedName("MulliteBlock").setCreativeTab(CreativeTabs.tabBlock).setHardness(7F);
 	MulliteOre = new MulliteOre(500, Material.rock, "MulliteOre").setUnlocalizedName("MulliteOre").setCreativeTab(CreativeTabs.tabBlock).setHardness(6F);
-	
+	ChestMullite = new ChestMullite(1223,Material.rock, "ChestMullite").setUnlocalizedName("MulliteBlock").setCreativeTab(CreativeTabs.tabBlock).setHardness(7F);
 	MulliteTNT = new MulliteTNT(1210).setUnlocalizedName("MulliteTNT").setCreativeTab(CreativeTabs.tabRedstone).setHardness(1F);
-	
 	ItemMullite = new ItemMullite(1005).setUnlocalizedName("Mullite").setCreativeTab(CreativeTabs.tabMaterials);
-	
 	ItemMulliteDust = new ItemMulliteDust(1221).setUnlocalizedName("MulliteDust").setCreativeTab(CreativeTabs.tabMaterials);
-	
 	MulliteCatalyst = new ItemMulliteCatalyst(1200).setUnlocalizedName("MulliteCatalyst").setMaxStackSize(1).setCreativeTab(CreativeTabs.tabMaterials);
+	StaffofDay = new ItemStaffofDay(1130).setUnlocalizedName("StaffofDay").setCreativeTab(CreativeTabs.tabTools);
+	
 	
 	//Roxite//
 	
@@ -171,22 +290,18 @@ public mullak99() {
     RoxiteSword =  new ItemRoxiteSword(1008, toolMullite).setUnlocalizedName("RoxiteSword");
     RoxiteAxe =  new ItemRoxiteAxe(1009, toolMullite).setUnlocalizedName("RoxiteAxe");
     RoxiteHoe =  new ItemRoxiteHoe(1010, toolMullite).setUnlocalizedName("RoxiteHoe");
-    
-    RoxiteHelmet =  new RoxiteArmor(1016, ArmorMullite, ModLoader.addArmor("RoxiteHelmet"), 0).setUnlocalizedName("mod/RoxiteHelmet").setCreativeTab(CreativeTabs.tabCombat);
-    RoxiteChest =  new RoxiteArmor(1017, ArmorMullite, ModLoader.addArmor("RoxiteChest"), 1).setUnlocalizedName("mod/RoxiteChest").setCreativeTab(CreativeTabs.tabCombat);
-    RoxiteLegs =  new RoxiteArmor(1018, ArmorMullite, ModLoader.addArmor("RoxiteLegs"), 2).setUnlocalizedName("mod/RoxiteLegs").setCreativeTab(CreativeTabs.tabCombat);
-    RoxiteBoots =  new RoxiteArmor(1019, ArmorMullite, ModLoader.addArmor("RoxiteBoots"), 3).setUnlocalizedName("mod/RoxiteBoots").setCreativeTab(CreativeTabs.tabCombat);
-	
+    RoxiteHelmet =  new RoxiteArmor(1016, ArmorRoxite, proxy.addArmor("Roxite"), 0).setUnlocalizedName("RoxiteHelmet").setCreativeTab(CreativeTabs.tabCombat);
+    RoxiteChest =  new RoxiteArmor(1017, ArmorRoxite, proxy.addArmor("Roxite"), 1).setUnlocalizedName("RoxiteChest").setCreativeTab(CreativeTabs.tabCombat);
+    RoxiteLegs =  new RoxiteArmor(1018, ArmorRoxite, proxy.addArmor("Roxite"), 2).setUnlocalizedName("RoxiteLegs").setCreativeTab(CreativeTabs.tabCombat);
+    RoxiteBoots =  new RoxiteArmor(1019, ArmorRoxite, proxy.addArmor("Roxite"), 3).setUnlocalizedName("RoxiteBoots").setCreativeTab(CreativeTabs.tabCombat);
     RoxiteBlock = new RoxiteBlock(503,Material.rock, "RoxiteBlock").setUnlocalizedName("RoxiteBlock").setCreativeTab(CreativeTabs.tabBlock).setHardness(7F);
     RoxiteOre = new RoxiteOre(501, Material.rock, "RoxiteOre").setUnlocalizedName("RoxiteOre").setCreativeTab(CreativeTabs.tabBlock).setHardness(6F);
-    
 	ItemRoxite = new ItemRoxite(1011).setUnlocalizedName("Roxite").setCreativeTab(CreativeTabs.tabMaterials);
 	ItemRoxiteDust = new ItemRoxiteDust(1222).setUnlocalizedName("RoxiteDust").setCreativeTab(CreativeTabs.tabMaterials);
 	
 	//Other//
 	
 	MortarandPestle = new ItemMortarandPestle(1211).setUnlocalizedName("MortarandPestle").setMaxStackSize(1).setCreativeTab(CreativeTabs.tabTools);
-	
 	CopperOre = new CopperOre(504, Material.rock, "CopperOre").setUnlocalizedName("CopperOre").setCreativeTab(CreativeTabs.tabBlock).setHardness(3F);
 	TinOre = new TinOre(506, Material.rock, "TinOre").setUnlocalizedName("TinOre").setCreativeTab(CreativeTabs.tabBlock).setHardness(3F);
 	TinBlock = new TinBlock(507, Material.rock, "TinBlock").setUnlocalizedName("TinBlock").setCreativeTab(CreativeTabs.tabBlock).setHardness(4F);
@@ -197,14 +312,10 @@ public mullak99() {
 	BronzeBlock = new BronzeBlock(1110, Material.rock, "BronzeBlock").setUnlocalizedName("BronzeBlock").setCreativeTab(CreativeTabs.tabBlock).setHardness(4F);
 	ingotSteel = new ingotSteel(1230).setUnlocalizedName("Steel").setCreativeTab(CreativeTabs.tabMaterials);
 	SteelBlock = new SteelBlock(1231, Material.rock, "SteelBlock").setUnlocalizedName("SteelBlock").setCreativeTab(CreativeTabs.tabBlock).setHardness(5F);
-	
 	CopperContacts = new ItemCopperContacts(1116).setUnlocalizedName("CopperContacts").setCreativeTab(CreativeTabs.tabMaterials);
-	
 	EnderBattery = new ItemEnderBattery(1201).setUnlocalizedName("EnderBattery").setMaxStackSize(1).setCreativeTab(CreativeTabs.tabMaterials);
 	MulliteBattery = new ItemMulliteBattery(1202).setUnlocalizedName("MulliteBattery").setMaxStackSize(1).setCreativeTab(CreativeTabs.tabMaterials);
-	
 	ItemCoalDust = new ItemCoalDust(1229).setUnlocalizedName("CoalDust").setCreativeTab(CreativeTabs.tabMaterials);
-	
 	BatteryCase = new ItemBatteryCase(1115).setUnlocalizedName("BatteryCase").setCreativeTab(CreativeTabs.tabMaterials);
 	
 	//Block Register//
@@ -218,7 +329,7 @@ public mullak99() {
 	GameRegistry.registerBlock(TinBlock);
 	GameRegistry.registerBlock(BronzeBlock);
 	GameRegistry.registerBlock(SteelBlock);
-	
+	GameRegistry.registerBlock(ChestMullite);
 	GameRegistry.registerBlock(MulliteTNT);
 	
 	//Mullite//
@@ -231,18 +342,15 @@ public mullak99() {
 	LanguageRegistry.addName(MulliteSword, "Mullite Sword");
 	LanguageRegistry.addName(MulliteAxe, "Mullite Axe");
 	LanguageRegistry.addName(MulliteHoe, "Mullite Hoe");
-	
 	LanguageRegistry.addName(ItemMulliteDust, "Mullite Dust");
-	
-	LanguageRegistry.addName(MulliteTNT, "Mullite TNT [W.I.P]");
-	
+	LanguageRegistry.addName(MulliteTNT, "Mullite TNT");
+	LanguageRegistry.addName(ChestMullite, "Mullite Chest [DONT USE IT WILL CRASH YOU!]");
 	LanguageRegistry.addName(MulliteHelmet, "Mullite Helmet");
 	LanguageRegistry.addName(MulliteChest, "Mullite Chestplate");
 	LanguageRegistry.addName(MulliteLegs, "Mullite Leggings");
 	LanguageRegistry.addName(MulliteBoots, "Mullite Boots");
-	
 	LanguageRegistry.addName(MulliteCatalyst, "Mullite Catalyst");
-	
+	LanguageRegistry.addName(StaffofDay, "Staff of Day [W.I.P]");
 	
 	//Roxite//
 	
@@ -254,9 +362,7 @@ public mullak99() {
 	LanguageRegistry.addName(RoxiteSword, "Roxite Sword");
 	LanguageRegistry.addName(RoxiteAxe, "Roxite Axe");
 	LanguageRegistry.addName(RoxiteHoe, "Roxite Hoe");
-	
 	LanguageRegistry.addName(ItemRoxiteDust, "Roxite Dust");
-	
 	LanguageRegistry.addName(RoxiteHelmet, "Roxite Helmet");
 	LanguageRegistry.addName(RoxiteChest, "Roxite Chestplate");
 	LanguageRegistry.addName(RoxiteLegs, "Roxite Leggings");
@@ -281,13 +387,15 @@ public mullak99() {
     LanguageRegistry.addName(ItemCoalDust, "Coal Dust");
     LanguageRegistry.addName(ingotSteel, "Steel Ingot");
     LanguageRegistry.addName(SteelBlock, "Block of Steel");
-	//Ingot at bottom
 	
 	//Catalyst//
 	
 	MulliteCatalyst.setContainerItem(MulliteCatalyst);
 	EnderBattery.setContainerItem(EnderBattery);
 	MortarandPestle.setContainerItem(MortarandPestle);
+	
+	
+	//Fuel//
 	
 	GameRegistry.registerFuelHandler(new mullak99FuelHandler());
 	
@@ -322,7 +430,6 @@ public mullak99() {
 			{
 		   "X", 'X', MulliteBlock
 			});
-	
 	GameRegistry.addRecipe(new ItemStack(DEBUGPickaxe, 1), new Object [] 
 			{
 		"XXX", " - ", " - ", 'X', Block.bedrock, '-', mullak99.MulliteBlock
@@ -355,6 +462,10 @@ public mullak99() {
 	GameRegistry.addRecipe(new ItemStack(MulliteBattery, 1), new Object [] 
 			{
 		"X-X", "X~X", "X#X", 'X', mullak99.ItemMullite, '-', mullak99.MulliteCatalyst, '~', Item.netherStar, '#', mullak99.BatteryCase
+			});
+	GameRegistry.addRecipe(new ItemStack(MulliteTNT, 2), new Object [] 
+			{
+		   "-X-", 'X', ItemMullite, '-', Block.tnt,
 			});
 	
 	GameRegistry.addSmelting(MulliteOre.blockID, new ItemStack (ItemMullite, 1), 5F);
@@ -490,10 +601,11 @@ public mullak99() {
 			});
 	
 	//UE Converts//
-	/*GameRegistry.addRecipe(new ItemStack(BasicComponents.itemWrench, 1), new Object [] 
+	GameRegistry.addRecipe(new ItemStack(BasicComponents.itemWrench, 1), new Object [] 
 			{
-		"X X", " - ", " X ", 'X', Item.ingotIron, '-', Item.diamond, 
-			});*/
+		"X X", " X ", " X ", 'X', Item.ingotIron,
+			});
+
 	
 	
 	
@@ -508,19 +620,19 @@ public mullak99() {
 	MinecraftForge.setBlockHarvestLevel(CopperBlock, "pickaxe", 1);
 	
 	
-	// World Gen
+	
+	
+	//World Gen//
+	
 			GameRegistry.registerWorldGenerator((IWorldGenerator) new OreWorldGen());
-}
+	        addNames();
+	        oreRegistration();
+	        addOreRecipes();
 
-@Init
+	}
 
-public void load(FMLInitializationEvent event)
-{
-        addNames();
-        oreRegistration();
-        addOreRecipes();
 
-}
+
 
 public static void addNames()
 {
@@ -552,7 +664,16 @@ public static void addOreRecipes()
 }
 @PreInit
 public void preInit(FMLPreInitializationEvent event) {
-
+	
+	event.getModMetadata().version = "Beta 0.1.0"; 
+	event.getModMetadata().name = "mullak99's Mod"; 
+	event.getModMetadata().description = "mullak99's Mod adds many things to Minecraft, such as tools, armor and blocks"; 
+	event.getModMetadata().authorList.add("mullak99"); 
+	event.getModMetadata().logoFile = "/mullak99/logo.png";
+			
 }
-
+	
+	//Container Registry//
+    
+	/*ModLoader.registerContainerID(mullak99.ChestMullite, 0);*/
 }

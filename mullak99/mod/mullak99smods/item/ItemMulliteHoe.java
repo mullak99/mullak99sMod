@@ -19,6 +19,6 @@ public class ItemMulliteHoe extends ItemHoe {
 	
 	public void func_94581_a(IconRegister iconRegister)
 	{
-	         iconIndex = iconRegister.registerIcon("mullak99:MulliteHoe");
+		itemIcon = iconRegister.registerIcon("mullak99:MulliteHoe");
 	}
 }

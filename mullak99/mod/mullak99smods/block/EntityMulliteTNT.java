@@ -94,7 +94,7 @@ public class EntityMulliteTNT extends Entity
 
     private void explode()
     {
-        float f = 2000.0F;
+        float f = 400.0F;
         this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, f, true);
     }
 

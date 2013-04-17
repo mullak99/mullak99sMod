@@ -19,6 +19,6 @@ public class ItemRoxiteShovel extends ItemSpade {
 	
 	public void func_94581_a(IconRegister iconRegister)
 	{
-	         iconIndex = iconRegister.registerIcon("mullak99:RoxiteShovel");
+		itemIcon = iconRegister.registerIcon("mullak99:RoxiteShovel");
 	}
 }
